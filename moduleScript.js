@@ -108,6 +108,7 @@ function customCmd(val) {
     else if (local.match(address, "/dbaudio1/positioning/source_spread/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
+      local.sendTo("127.0.0.1", 40015, "/dbaudio1/positioning/source_spread/" + index, args[0]);
       script.log("Spread for object "+index+": "+args[0]);
       spread[index].set(args[0]);
     }
@@ -115,6 +116,7 @@ function customCmd(val) {
     else if (local.match(address, "/dbaudio1/positioning/source_delaymode/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
+      local.sendTo("127.0.0.1", 40015, "/dbaudio1/positioning/source_delaymode/" + index, args[0]);
       script.log("Delay mode for "+index+": "+args[0]);
       mode[index].set(args[0]);
     }
@@ -122,6 +124,7 @@ function customCmd(val) {
     else if( local.match(address, "/dbaudio1/coordinatemapping/source_position_x/1/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
+      local.sendTo("127.0.0.1", 40015, "/dbaudio1/coordinatemapping/source_position_x/1/" + index, args[0]);
       script.log("X position for object "+index+": "+args[0]);
       var currentY = xy[index].get()[1]; // Get current Y value
       xy[index].set(args[0], currentY);
@@ -130,6 +133,7 @@ function customCmd(val) {
     else if( local.match(address, "/dbaudio1/coordinatemapping/source_position_y/1/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
+      local.sendTo("127.0.0.1", 40015, "/dbaudio1/coordinatemapping/source_position_y/1/" + index, args[0]);
       script.log("Y position for object "+index+": "+args[0]);
       var currentX = xy[index].get()[0]; // Get current X value
       xy[index].set(currentX, args[0]);
@@ -138,6 +142,7 @@ function customCmd(val) {
     else if (local.match(address, "/dbaudio1/coordinatemapping/source_position_xy/1/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
+      local.sendTo("127.0.0.1", 40015, "/dbaudio1/coordinatemapping/source_position_xy/1/" + index, args[0], args[1]);
       script.log("X position for object "+index+": "+args[0] + ", Y position: " + args[1]);
       xy[index].set(args[0], args[1]);
     }

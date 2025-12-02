@@ -27,6 +27,11 @@
     "Module param":
     {
       "type":"Integer"
+    },
+    "port to En-Bridge":
+    {
+      "type":"Integer",
+      "default":40015
     }
   },
 
