@@ -4,9 +4,9 @@
   "path":"Custom",
   
   "version":"1.0.0",
-  "description":"My module description",
-  "url":"https://github.com/tommag/Sample-Chataigne-module",
-  "downloadURL":"https://github.com/tommag/Sample-Chataigne-module/archive/master.zip",
+  "description":"d&b DS100 implementation via OSC with DiGiCo data passthrough",
+  "url":"https://github.com/JorisMachon/chataigne-custom-ds100",
+  "downloadURL":"",
 
   "hasInput":true,
   "hasOutput":true, 

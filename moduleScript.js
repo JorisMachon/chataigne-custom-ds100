@@ -7,7 +7,7 @@ var updatingFromOSC = false; // Flag to prevent feedback loop
 var numberOfObjects = 64; // Number of sound objects to manage
 
 var digicoRXPort = 9000; // Default port for DiGiCo RX
-var digicoIP = "127.0.0.1"; // Default IP for DiGiCo
+var digicoIP = "192.168.1.101"; // Default IP for DiGiCo
 
 function init() {
   script.log("Custom module init");
@@ -46,16 +46,16 @@ function init() {
 function moduleParameterChanged(param) {
   script.log(param.name + " parameter changed, new value: " + param.get());
 
-  if(param.is(local.parameters.en_BridgeRxPort)){
-    script.log("Updating En-Bridge RX port to: " + param.get());
-    en_BridgeRxPort = param.get();
+  if(param.is(local.parameters.diGiCoRXPort)){
+    script.log("Updating DiGiCo RX port to: " + param.get());
+    digicoRXPort = param.get();
   }
 
-   else if (param.is(local.parameters.en_BridgeIP)){ 
+   else if (param.is(local.parameters.diGiCoIP)){ 
     var ip = param.get();
     // Optional: validate IP format
-    en_BridgeIP = ip;
-    script.log("Updating En-Bridge IP to: " + en_BridgeIP);
+    digicoIP = ip;
+    script.log("Updating DiGiCo IP to: " + digicoIP);
   }
 }
 
