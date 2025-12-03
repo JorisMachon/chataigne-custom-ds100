@@ -5,6 +5,9 @@ var reverb = [];
 var mode = [];
 var updatingFromOSC = false; // Flag to prevent feedback loop
 
+var en_BridgeRxPort = 40015; // Default port for En-Bridge RX
+var en_BridgeIP = "127.0.0.1"; // Default IP for En-Bridge
+
 function init() {
   script.log("Custom module init");
 
@@ -40,7 +43,19 @@ function init() {
 
 
 function moduleParameterChanged(param) {
-  // script.log(param.name + " parameter changed, new value: " + param.get());
+  script.log(param.name + " parameter changed, new value: " + param.get());
+
+  if(param.is(local.parameters.en_BridgeRxPort)){
+    script.log("Updating En-Bridge RX port to: " + param.get());
+    en_BridgeRxPort = param.get();
+  }
+
+   else if (param.is(local.parameters.en_BridgeIP)){ 
+    var ip = param.get();
+    // Optional: validate IP format
+    en_BridgeIP = ip;
+    script.log("Updating En-Bridge IP to: " + en_BridgeIP);
+  }
 }
 
 function moduleValueChanged(value) {
@@ -48,7 +63,6 @@ function moduleValueChanged(value) {
   if (updatingFromOSC) return;
   
   // Check which container the value belongs to and send appropriate OSC
-  
   // Check if it's a reverb parameter
   for (var i = 1; i <= 16; i++) {
     if (value == reverb[i]) {
@@ -108,7 +122,7 @@ function customCmd(val) {
     else if (local.match(address, "/dbaudio1/positioning/source_spread/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
-      local.sendTo("127.0.0.1", 40015, "/dbaudio1/positioning/source_spread/" + index, args[0]);
+      local.sendTo(en_BridgeIP, en_BridgeRxPort, "/dbaudio1/positioning/source_spread/" + index, args[0]);
       script.log("Spread for object "+index+": "+args[0]);
       spread[index].set(args[0]);
     }
@@ -116,7 +130,7 @@ function customCmd(val) {
     else if (local.match(address, "/dbaudio1/positioning/source_delaymode/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
-      local.sendTo("127.0.0.1", 40015, "/dbaudio1/positioning/source_delaymode/" + index, args[0]);
+      local.sendTo(en_BridgeIP, en_BridgeRxPort, "/dbaudio1/positioning/source_delaymode/" + index, args[0]);
       script.log("Delay mode for "+index+": "+args[0]);
       mode[index].set(args[0]);
     }
@@ -124,7 +138,7 @@ function customCmd(val) {
     else if( local.match(address, "/dbaudio1/coordinatemapping/source_position_x/1/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
-      local.sendTo("127.0.0.1", 40015, "/dbaudio1/coordinatemapping/source_position_x/1/" + index, args[0]);
+      local.sendTo(en_BridgeIP, en_BridgeRxPort, "/dbaudio1/coordinatemapping/source_position_x/1/" + index, args[0]);
       script.log("X position for object "+index+": "+args[0]);
       var currentY = xy[index].get()[1]; // Get current Y value
       xy[index].set(args[0], currentY);
@@ -133,7 +147,7 @@ function customCmd(val) {
     else if( local.match(address, "/dbaudio1/coordinatemapping/source_position_y/1/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
-      local.sendTo("127.0.0.1", 40015, "/dbaudio1/coordinatemapping/source_position_y/1/" + index, args[0]);
+      local.sendTo(en_BridgeIP, en_BridgeRxPort, "/dbaudio1/coordinatemapping/source_position_y/1/" + index, args[0]);
       script.log("Y position for object "+index+": "+args[0]);
       var currentX = xy[index].get()[0]; // Get current X value
       xy[index].set(currentX, args[0]);
@@ -142,7 +156,7 @@ function customCmd(val) {
     else if (local.match(address, "/dbaudio1/coordinatemapping/source_position_xy/1/*")) {
       var parts = address.split("/");
       var index = parseInt(parts[parts.length - 1]);
-      local.sendTo("127.0.0.1", 40015, "/dbaudio1/coordinatemapping/source_position_xy/1/" + index, args[0], args[1]);
+      local.sendTo(en_BridgeIP, en_BridgeRxPort, "/dbaudio1/coordinatemapping/source_position_xy/1/" + index, args[0], args[1]);
       script.log("X position for object "+index+": "+args[0] + ", Y position: " + args[1]);
       xy[index].set(args[0], args[1]);
     }

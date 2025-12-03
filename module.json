@@ -24,11 +24,12 @@
 
   "parameters":
   {
-    "Module param":
-    {
-      "type":"Integer"
-    },
-    "port to En-Bridge":
+    "En-Bridge IP":
+  {
+    "type":"String",
+    "default":"127.0.0.1"
+  },
+    "En-Bridge rx port":
     {
       "type":"Integer",
       "default":40015
