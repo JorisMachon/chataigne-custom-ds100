@@ -24,15 +24,15 @@
 
   "parameters":
   {
-    "En-Bridge IP":
+    "DiGiCo IP":
   {
     "type":"String",
     "default":"127.0.0.1"
   },
-    "En-Bridge rx port":
+    "DiGiCo RX Port":
     {
       "type":"Integer",
-      "default":40015
+      "default":90001
     }
   },
 
