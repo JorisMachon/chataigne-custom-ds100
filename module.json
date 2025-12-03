@@ -18,7 +18,7 @@
     "autoAdd":false,
     "oscInput":
     {
-      "localPort":9001
+      "localPort":40016
     }
   },
 
@@ -32,7 +32,7 @@
     "DiGiCo RX Port":
     {
       "type":"Integer",
-      "default":90001
+      "default":9000
     }
   },
 
@@ -69,26 +69,6 @@
 		{
 			"menu":"Sound Objects",
 			"callback":"reverbSendGain",
-			"parameters":
-			{
-				"Sound Object #":
-				{
-					"type":"Integer",
-					"min":1,
-					"max":64
-				},
-				"Send gain dB":
-				{
-					"type":"Float",
-					"min":-120,
-					"max":24
-				}
-			}
-		},
-    "piemel":
-		{
-			"menu":"Sound Objects",
-			"callback":"reverbSendGain2",
 			"parameters":
 			{
 				"Sound Object #":
